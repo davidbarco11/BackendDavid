@@ -1,10 +1,14 @@
 // Requiring modules
 const express = require('express');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 //const pool = require('./database');
 
 //ejecutar express.
 const app = express();
+
+//confiro morgan, el cual me permite ver por consola las peticiones que hago y el restultado.
+app.use(morgan('dev'));
 
 //cargar archivos de rutas.
 const user_routes = require('./routes/user');

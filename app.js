@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 //ejecutar express.
 const app = express();
 
-//confiro morgan, el cual me permite ver por consola las peticiones que hago y el restultado.
+//configuro morgan, el cual me permite ver por consola las peticiones que hago y el restultado.
 app.use(morgan('dev'));
 
 //cargar archivos de rutas.

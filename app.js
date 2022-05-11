@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 //const pool = require('./database');
 
 //ejecutar express.
@@ -19,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //cors.
+app.use(cors({
+    origin: '*'
+  }));
 
 //reescribir rutas.
 app.use('/api', user_routes);

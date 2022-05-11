@@ -52,7 +52,7 @@ const controller = {
             //devolver respuesta cuando se ha insertado correctamente.
             return res.status(200).send({
               status: "success",
-              message: "registro de usuarios exitoso.",
+              message: "exitoso",
               movie,
             });
           }
@@ -121,7 +121,7 @@ const controller = {
     );
   },
 
-  //metodo para subir imagen de la pelicula
+  //metodo para subir imagen y video de la pelicula
   uploadImage: (req, res)=>{
 
     //configurar el modulo de connect multiparty.hecho en  /routes/user.js
@@ -130,7 +130,7 @@ const controller = {
     let file_name = 'Imagen no subida.';
     let file_video = 'Video no subido';
     
-    
+    //return console.log(req.files);
     if(!req.files){
       res.status(500).send({
         status: "error",
@@ -166,8 +166,6 @@ const controller = {
 
     //extension del archivo video.
     let file_ext_video = file_ext_split_video[file_ext_split_video.length -1];
-
-    console.log(file_ext_video);
 
     //comprobar extension (solo imagenes), si no es valida borrar fichero subido.
     if(file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif' || file_ext_video != 'mp4'){
@@ -299,12 +297,40 @@ const controller = {
 
     }else{
       //devolver los datos.
-      return res.status(200).send({
-          message: "no existe la pelicula en la base de datos.",
+      return res.status(404).send({
+          message: "no found.",
       });
     }
 
      
+  },
+
+  //metodo para sacar peliculas por categoria.
+  getMovieCategory: async (req, res)=>{
+     //recogo el numero de id que me llega desde la url.
+     const {categoryId} = req.params;
+
+     //busco en base de datos el usuario con ese id
+    const movie = await pool.query(
+      `SELECT movies.id,movies.name as nombre ,movies.id_categoria, 
+      movies.descripcion,movies.image,movies.video, categorias.name as nombre_categoria
+      FROM movies INNER JOIN categorias ON(movies.id_categoria = categorias.id)
+      WHERE categorias.id = ${categoryId};`
+    );
+    //si lo encuentra.
+    if (movie.length) {
+
+      return res.status(200).send({
+        message: "success",
+        movie
+    });
+
+    }else{
+      //devolver los datos.
+      return res.status(200).send({
+          message: "no existen peliculas de esa categoria en la base de datos.",
+      });
+    }
   }
 
 };

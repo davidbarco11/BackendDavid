@@ -17,4 +17,7 @@ router.get('/video/:fileName', MovieController.video);
 router.get('/movies', MovieController.getMovies);
 router.get('/movie/:movieId', MovieController.getMovie);
 
+//ruta para sacar las peliculas por id de la categoria.
+router.get('/movie-category/:categoryId', MovieController.getMovieCategory);
+
 module.exports = router;

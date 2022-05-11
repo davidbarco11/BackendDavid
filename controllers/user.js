@@ -7,6 +7,15 @@ const fs = require('fs');
 const path = require('path');
 
 const controller = {
+
+
+  validarToken : (req, res) => {
+    return res.status(200).send({
+      message: 'autorizado',
+    })
+    
+  },
+
   //ejemplo de como se debe hacer en postman para cargar la ruta:
   //      http://localhost:3000/api/probando
   probando: (req, res) => {
@@ -119,10 +128,14 @@ const controller = {
 
             //si es correcto, generar el token jwt.
             if(getToken){
+             
+            //limpiar el objeto para no devolver la password.
+            usuario[0]['password'] = undefined;  
             //devolver respuesta
             return res.status(200).send({
                 message: "listo",
-                token: jwt.createToken(usuario)
+                token: jwt.createToken(usuario),
+                usuario
             });
             }else{
                 //limpiar el objeto para no devolver la password.

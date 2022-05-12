@@ -61,7 +61,7 @@ const controller = {
       //si existe un usuario, informar de que ya está un usuario con el mismo email.
       if (usuarioExiste.length) {
         return res.status(200).send({
-          status: "error",
+          status: "email existe",
           message: "el email ya existe en base de datos.",
         });
       } else {
@@ -96,7 +96,7 @@ const controller = {
       }
     } else {
       return res.status(500).send({
-        status: "error",
+        status: "datos invalidos",
         message: "datos invalidos",
       });
     }

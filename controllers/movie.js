@@ -321,6 +321,7 @@ const controller = {
     if (movie.length) {
 
       return res.status(200).send({
+        status: "ok",
         message: "success",
         movie
     });
@@ -328,6 +329,7 @@ const controller = {
     }else{
       //devolver los datos.
       return res.status(200).send({
+          status: "error",
           message: "no existen peliculas de esa categoria en la base de datos.",
       });
     }

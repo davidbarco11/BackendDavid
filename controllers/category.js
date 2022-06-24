@@ -74,7 +74,7 @@ const controller = {
       })
     }
     
-    //buscar y actualizar pelicula.
+    //buscar y actualizar categoria.
     pool.query(
       `UPDATE categorias SET name = '${name.toUpperCase()}' where id = ${categoryId}`,
       async (err, result) => {
@@ -96,7 +96,7 @@ const controller = {
           //devolver respuesta cuando se ha insertado correctamente.
           return res.status(200).send({
             status: "success",
-            message: "pelicula actualizada.",
+            message: "categoria actualizada.",
             categoryUdpate
           });
         }

@@ -179,9 +179,9 @@ const controller = {
 
     //recoger los datos del usuario.
     const {name,surname,email,password} = req.body
-    //recoder el id del usuario que devolví del token
+    //recoder el id del usuario que devolví del token.
     const idUser = req.user.sub;
-    
+
     
     //validar los datos.
     try {
@@ -233,6 +233,9 @@ const controller = {
           //buscar el registro ya actualizado.
           const userUdpate = await pool.query(`select * from users where id = ${idUser}`);
 
+          //eliminar la propiedad password para no devolverla en los datos del usuario al frontend.
+          delete userUdpate[0].password;
+
           
           //devolver respuesta cuando se ha insertado correctamente.
           return res.status(200).send({
@@ -240,7 +243,7 @@ const controller = {
             message: "usuario actualizado.",
             userUdpate,
             //actualizar el token.
-            //token: jwt.createToken(userUdpate)
+            token: jwt.createToken(userUdpate)
           });
         }
       }

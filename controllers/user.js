@@ -76,7 +76,7 @@ const controller = {
             (err, result) => {
               if (err) {
                 //devolver respuesta de error al guardar en base de datos.
-                return res.status(200).send({
+                return res.status(400).send({
                   status: "error",
                   message:
                     "no se pudo completar el registro del usuario en bd.",

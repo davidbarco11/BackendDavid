@@ -16,8 +16,8 @@ const user_routes = require('./routes/user');
 const movie_routes = require('./routes/movie');
 const category_routes = require('./routes/category');
 //middleware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); //En algunas ocasiones no requerimos utilizar json para enviar datos sino una variante como application/x-www-form-urlencoded. Este es especialmente útil en formularios HTML.
+app.use(bodyParser.json()); //instalar body-parser y habilitar json() así como url-encode como middlewares para convertir datos a JSON.
 
 //cors.
 app.use(cors({
